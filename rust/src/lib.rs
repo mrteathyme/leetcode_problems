@@ -11,41 +11,41 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32>
  vec![] }
 
 pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> 
-    { use std::collections::HashSet;
+{ use std::collections::HashSet;
 
-      if nums.len() == 3 
-      { if nums[0] + nums[1] + nums[2] == 0 {return vec![nums]} }
+  if nums.len() == 3 
+  { if nums[0] + nums[1] + nums[2] == 0 {return vec![nums]} }
 
-      nums.sort_unstable();
+    nums.sort_unstable();
 
-      let mut results = HashSet::new();
-      let mut previous_int = None;
+    let mut results = HashSet::new();
+    let mut previous_int = None;
 
-      for x in 0..nums.len()-2 
-      { if let Some(num) = previous_int 
-        { if num == nums[x] 
-          { continue }
-          else 
-          { previous_int = Some(nums[x]) } }
-          else 
-          { previous_int = Some(nums[x]) }
+    for x in 0..nums.len()-2 
+    { if let Some(num) = previous_int 
+      { if num == nums[x] 
+        { continue }
+        else 
+        { previous_int = Some(nums[x]) } }
+        else 
+        { previous_int = Some(nums[x]) }
 
-        let mut y = x + 1;
-        let mut z = nums.len() - 1;
+      let mut y = x + 1;
+      let mut z = nums.len() - 1;
             
-        while y < z 
-        { let a = nums[y]+nums[z];
+      while y < z 
+      { let a = nums[y]+nums[z];
 
-          if a < nums[x]*-1 
-          { y+=1; } 
-          else if a > nums[x]*-1 
-          { z-=1; }
-          else 
-          { results.insert(vec![nums[x],nums[y],nums[z]]);
-            y+=1;
-            z-=1; } } }
+        if a < nums[x]*-1 
+        { y+=1; } 
+        else if a > nums[x]*-1 
+        { z-=1; }
+        else 
+        { results.insert(vec![nums[x],nums[y],nums[z]]);
+          y+=1;
+          z-=1; } } }
 
-     results.into_iter().collect() }
+    results.into_iter().collect() }
 
     #[cfg(test)]
 mod tests 
